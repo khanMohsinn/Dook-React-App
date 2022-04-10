@@ -8,8 +8,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel } from "@material-ui/icons";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { currentUser, logout, useAuth } from "./contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -66,12 +67,28 @@ const useStyles = makeStyles((theme) => ({
 
 const MyNavbar = () => {
   const classes = useStyles();
+
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    setError("");
+
+    try {
+      await logout();
+      navigate("/");
+    } catch {
+      setError("Failed to log out");
+    }
+  };
+
   return (
     <AppBar position="static">
       <Toolbar className={classes.toolbar}>
         <div className={classes.container}>
           <div className={classes.logoContainer}>
-            <Link to="/">
+            <Link to="/menu">
               <img src="/images/Dook_Logo.png" className={classes.logo}></img>
             </Link>
           </div>
@@ -87,11 +104,11 @@ const MyNavbar = () => {
                   Popular Dishes
                 </Typography>
               </Link>
-              <Link to="/restaurents" className={classes.links}>
+              {/* <Link to="/restaurents" className={classes.links}>
                 <Typography variant="h6" className={classes.navItems}>
                   Restaurents
                 </Typography>
-              </Link>
+              </Link> */}
               <Link to="/offers" className={classes.links}>
                 <Typography variant="h6" className={classes.navItems}>
                   Offers
@@ -101,16 +118,20 @@ const MyNavbar = () => {
           </div>
           <div className={classes.authContainer}>
             <div className={classes.auth}>
-              <Link to="/login" className={classes.links}>
-                <Typography variant="h6" className={classes.authItems}>
-                  Login
-                </Typography>
+              <Link to="/" className={classes.links}>
+                <Button
+                  variant="contained"
+                  className={classes.authItems}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
               </Link>
-              <Link to="/signup" className={classes.links}>
+              {/* <Link to="/signup" className={classes.links}>
                 <Typography variant="h6" className={classes.authItems}>
                   Sign Up
                 </Typography>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

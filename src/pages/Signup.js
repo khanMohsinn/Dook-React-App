@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useAuth } from "../Components/contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,6 +23,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +35,12 @@ const Signup = () => {
       setError("");
       await signup(email, password);
       console.log("Sign up successful");
+      navigate("/menu");
     } catch (error) {
-      alert(error.code);
+      console.log(error.code);
+      if (error.code === "auth/email-already-in-use") {
+        setError("Email already exists.Try again!");
+      }
     }
   };
 
@@ -42,6 +48,7 @@ const Signup = () => {
     <div>
       <div className={classes.container}>
         <h1>Signup</h1>
+        {error && <h4 style={{ color: "red", marginTop: "2em" }}>{error}</h4>}
         <form
           onSubmit={handleSubmit}
           className={classes.form}

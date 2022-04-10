@@ -1,8 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { useAuth } from "../Components/contexts/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,18 +20,19 @@ const Login = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      login(email, password);
+      await login(email, password);
+      navigate("/menu");
     } catch (error) {
       if (error.code === "auth/wrong-password") {
         console.log(error.code);
-        toast.error("Please check the Password");
       }
       if (error.code === "auth/user-not-found") {
-        toast.error("Please check the Email");
+        console.log(error.code);
       }
     }
   };
@@ -71,7 +71,6 @@ const Login = () => {
           <input type="submit" value="Login" style={{ marginTop: "20px" }} />
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };
