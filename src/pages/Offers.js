@@ -1,11 +1,25 @@
+import { Box, Card, Grid, Typography } from "@material-ui/core";
 import React from "react";
+import MyNavbar from "../Components/MyNavbar";
 import useDocumentTitle from "../pages/useDocumentTitle";
 
 const Offers = () => {
   useDocumentTitle("Dook-Offers");
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Offers</h1>
+    <div style={{ justifyContent: "center" }}>
+      <MyNavbar />
+
+      <Box>
+        <Grid container md={12}>
+          <Grid item md={12}>
+            <Card md={12}>
+              <Typography style={{ textAlign: "center" }}>
+                No Offers available currently
+              </Typography>
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 };

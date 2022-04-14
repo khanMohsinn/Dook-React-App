@@ -11,6 +11,7 @@ import AuthProvider from "./Components/contexts/AuthContext";
 import Layout from "./Components/Layout";
 import RequireAuth from "./Components/RequireAuth";
 import RedirectAuth from "./Components/RedirectAuth";
+import Cart from "./pages/Cart";
 
 const App = () => (
   <Router>
@@ -27,6 +28,7 @@ const App = () => (
             <Route element={<RequireAuth />}>
               <Route exact path="/popular_dishes" element={<PopularDishes />} />
               <Route exact path="/offers" element={<Offers />} />
+              <Route exact path="/cart" element={<Cart />} />
               <Route exact path="/menu" element={<Menu />} />
             </Route>
           </Route>

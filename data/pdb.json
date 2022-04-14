@@ -1,0 +1,25 @@
+{
+    "dishes" : [
+        {
+            "title" : "Meal Combo 1",
+            "price" : 260,
+            "description" : "Butter Paneer Masala + 4 Tawa Roti",
+            "id": 10
+        },
+        {
+            "title" : "Meal Combo 2",
+            "price" : 300,
+            "description" : "Kaju Curry + 4 Tawa Roti + Lassi",
+
+            "id": 11
+        },
+        {
+            "title" : "Meal Combo 3",
+            "price" : 360,
+            "description" : "Kaju Curry + 2 Butter Naan + Lassi",
+            "id": 12
+        }
+
+
+    ]
+}

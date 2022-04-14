@@ -1,0 +1,69 @@
+{
+    "dishes" : [
+        {
+            "title" : "Butter Paneer Masala",
+            "price" : 270,
+            "id" : 1
+        },
+        {
+            "title" : "Paneer Do Pyaza",
+            "price" : 150,
+            "id" : 2
+        },
+        {
+            "title" : "Malai Kofta",
+            "price" : 140,
+            "id" : 3
+        },
+        {
+            "title" : "Kaju Curry",
+            "price" : 230,
+            "id" : 4
+        },
+        {
+            "title" : "Mix Vegetable",
+            "price" : 140,
+            "id" : 5
+        },
+        {
+            "title" : "Veg Biryani",
+            "price" : 180,
+            "id" : 6
+        },
+        {
+            "title" : "Tawa Roti",
+            "price" : 11,
+            "id" : 7
+        },
+        {
+            "title" : "Plain Naan",
+            "price" : 30,
+            "id" : 8
+        },
+        {
+            "title" : "Butter Naan",
+            "price" : 45,
+            "id" : 9
+        },
+        {
+            "title" : "Meal Combo 1",
+            "price" : 260,
+            "description" : "Butter Paneer Masala + 4 Tawa Roti + Lassi",
+            "id": 10
+        },
+        {
+            "title" : "Meal Combo 2",
+            "price" : 300,
+            "description" : "Kaju Curry + 4 Tawa Roti + Lassi",
+            "id": 11
+        },
+        {
+            "title" : "Meal Combo 3",
+            "price" : 360,
+            "description" : "Kaju Curry + 2 Butter Naan + Lassi",
+            "id": 12
+        }
+
+
+    ]
+}

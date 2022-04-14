@@ -2,17 +2,26 @@ import {
   alpha,
   AppBar,
   Button,
+  IconButton,
   InputBase,
   makeStyles,
   Toolbar,
   Typography,
+  Badge,
 } from "@material-ui/core";
-import { Cancel } from "@material-ui/icons";
-import React, { useState } from "react";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { withStyles } from "@material-ui/styles";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { currentUser, logout, useAuth } from "./contexts/AuthContext";
+import Dishes from "./Dishes";
 
 const useStyles = makeStyles((theme) => ({
+  appbar: {
+    backgroundColor: "rgba(255, 0, 0, 0)",
+  },
+
   toolbar: {
     backgroundColor: "#212121",
   },
@@ -59,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
   auth: {
     display: "flex",
+    alignItems: "center",
   },
   authItems: {
     marginLeft: theme.spacing(6),
@@ -70,7 +80,9 @@ const MyNavbar = () => {
 
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.order.cart);
 
   const handleLogout = async () => {
     setError("");
@@ -83,8 +95,22 @@ const MyNavbar = () => {
     }
   };
 
+  useEffect(() => {
+    console.count("counter");
+    let count = 0;
+    {
+      cart.length === 0
+        ? setCartCount(0)
+        : cart.forEach((dish) => {
+            count += dish.qty;
+            setCartCount(count);
+            console.log(count);
+          });
+    }
+  }, [cart]);
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.appbar}>
       <Toolbar className={classes.toolbar}>
         <div className={classes.container}>
           <div className={classes.logoContainer}>
@@ -118,6 +144,22 @@ const MyNavbar = () => {
           </div>
           <div className={classes.authContainer}>
             <div className={classes.auth}>
+              <Link to="/signup" className={classes.links}>
+                <IconButton aria-label="cart">
+                  <Badge
+                    badgeContent={cartCount === 0 ? "0" : cartCount}
+                    color="primary"
+                  >
+                    <Link to="/cart">
+                      <ShoppingCartIcon
+                        // color="secondary"
+                        fontSize="large"
+                        style={{ color: "#E61B20" }}
+                      />
+                    </Link>
+                  </Badge>
+                </IconButton>
+              </Link>
               <Link to="/" className={classes.links}>
                 <Button
                   variant="contained"
@@ -127,11 +169,6 @@ const MyNavbar = () => {
                   Logout
                 </Button>
               </Link>
-              {/* <Link to="/signup" className={classes.links}>
-                <Typography variant="h6" className={classes.authItems}>
-                  Sign Up
-                </Typography>
-              </Link> */}
             </div>
           </div>
         </div>
